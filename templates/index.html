@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anaemia Prediction</title>
+</head>
+<body>
+    <h1>Anaemia Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="%Red Pixel">%Red Pixel:</label>
+        <input type="number" step="any" name="%Red Pixel" required><br>
+        <label for="%Green Pixel">%Green Pixel:</label>
+        <input type="number" step="any" name="%Green Pixel" required><br>
+        <label for="%Blue Pixel">%Blue Pixel:</label>
+        <input type="number" step="any" name="%Blue Pixel" required><br>
+        <label for="Hb">Hb:</label>
+        <input type="number" step="any" name="Hb" required><br>
+        <label for="Sex">Sex:</label>
+        <select name="Sex" required>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+        </select><br>
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if log_reg_result %}
+    <h2>Logistic Regression Prediction: {{ log_reg_result }}</h2>
+    {% endif %}
+
+    {% if mlp_result %}
+    <h2>Neural Network Prediction: {{ mlp_result }}</h2>
+    {% endif %}
+</body>
+</html>

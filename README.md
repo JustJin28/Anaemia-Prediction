@@ -1,84 +1,78 @@
-# Anemia Prediction Model
+# Anaemia Prediction
 
-## 1. Introduction
-Anemia is a condition characterized by a lack of healthy red blood cells. This project aims to develop a machine learning model to predict anemia in patients using various medical features. The primary objective is to minimize false negatives to ensure accurate detection of anemic patients.
+This project involves building machine learning models to predict anaemia in patients based on several features derived from medical data. The models used include Logistic Regression and a Neural Network. A Flask web application is provided to allow users to input the required features and get predictions.
 
-## 2. Data Description
-### Dataset
-The dataset includes the following columns:
-- `Number`: Unique identifier for each entry
-- `Sex`: Sex of the patient (M/F)
-- `%Red Pixel`: Percentage of red pixels
-- `%Green Pixel`: Percentage of green pixels
-- `%Blue Pixel`: Percentage of blue pixels
-- `Hb`: Hemoglobin level
-- `Anaemic`: Indicates whether the patient is anemic (Yes/No)
+## Project Structure
 
-### Initial Analysis
-Basic statistics and visualizations of the data were conducted to understand the distribution and identify any anomalies.
+- `data_prep.ipynb`: Jupyter notebook containing data preprocessing and model training.
+- `app.py`: Flask web application for user interaction and prediction.
+- `templates/index.html`: HTML template for the Flask web application.
+- `requirements.txt`: List of Python packages required for the project.
+- `logistic_regression_model.pkl`: Trained Logistic Regression model.
+- `neural_network_model.pkl`: Trained Neural Network model.
+- `scaler.pkl`: Scaler used for feature scaling.
 
-## 3. Data Preprocessing
-### Cleaning
-- Handled missing values by imputing with mean for numerical features and mode for categorical features.
-- One-hot encoded the `Sex` column.
+## Features
 
-### Feature Engineering
-- Scaled numerical features using `StandardScaler`.
+- `%Red Pixel`
+- `%Green Pixel`
+- `%Blue Pixel`
+- `Hb`
+- `Sex`
 
-## 4. Model Building and Tuning
-### Model Selection
-- Logistic Regression
-- Neural Network (MLPClassifier)
+## Getting Started
 
-### Hyperparameter Tuning
-- Used `GridSearchCV` for hyperparameter tuning.
-- Logistic Regression: Tuned `C`, `penalty`, and `solver`.
-- Neural Network: Tuned `hidden_layer_sizes`, `max_iter`, `alpha`, `learning_rate_init`, `learning_rate`, and `solver`.
+### Prerequisites
 
-## 5. Model Comparison and Results
-### Performance Metrics
-- Evaluated models using accuracy, precision, recall, F1-score, and ROC AUC.
+Make sure you have the following installed:
 
-### Visualizations
-- **ROC Curve**:
-  ![ROC Curve](roc_curve.png)
+- Python 3.x
+- pip (Python package installer)
+- Virtual environment tool (optional but recommended)
 
-  The ROC curve shows the trade-off between true positive rate and false positive rate for both logistic regression and neural network models. The AUC values indicate excellent performance for both models:
-  - Logistic Regression (AUC = 0.96)
-  - Neural Network (AUC = 0.97)
+### Installation
 
-### Logistic Regression Coefficients
-The coefficients for the logistic regression model indicate the importance of each feature in predicting anemia:
+1. Clone the repository:
 
-| Feature       | Coefficient |
-|---------------|-------------|
-| Number        | 0.023533    |
-| %Red Pixel    | -0.388539   |
-| %Green Pixel  | 1.401409    |
-| %Blue Pixel   | -0.587886   |
-| Hb            | -2.907277   |
-| Sex_F         | 0.396294    |
-| Sex_M         | -0.170344   |
+    ```bash
+    git clone https://github.com/yourusername/anaemia-prediction.git
+    cd anaemia-prediction
+    ```
 
-## 6. Model Interpretation
-### Feature Importance
-Used SHAP to interpret the models and identify the most influential features.
+2. Create and activate a virtual environment (optional but recommended):
 
-### Insights
-Discussed insights gained from the interpretation, such as the impact of hemoglobin levels on the prediction.
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
 
-## 7. Conclusion and Future Work
-### Summary
-The neural network and logistic regression models both performed well, with an accuracy of 88%. The models effectively minimized false negatives.
+3. Install the required packages:
 
-### Future Work
-- Explore additional models and techniques to further improve performance.
-- Collect more data to enhance the model's robustness.
-- Implement the model in a clinical setting for real-time anemia prediction.
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-## Appendix
-### Files in the Directory
-- `data/`: Directory containing the dataset.
-- `notebooks/`: Jupyter notebooks for data analysis, model building, and evaluation.
-- `models/`: Directory containing saved models (`logistic_regression_model.pkl`, `neural_network_model.pkl`).
-- `README.md`: This documentation file.
+4. Ensure the necessary model files (`logistic_regression_model.pkl`, `neural_network_model.pkl`, `scaler.pkl`) are in the project directory.
+
+### Running the Application
+
+1. Start the Flask application:
+
+    ```bash
+    python app.py
+    ```
+
+2. Open your web browser and go to `http://127.0.0.1:5000` to access the web application.
+
+### Usage
+
+- Enter the values for `%Red Pixel`, `%Green Pixel`, `%Blue Pixel`, `Hb`, and `Sex`.
+- Click "Predict" to get predictions from both the Logistic Regression and Neural Network models.
+
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
